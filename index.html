@@ -1326,6 +1326,14 @@
 
         <!-- Game Menu -->
         <div class="game-menu" id="gameMenu">
+            <div class="game-card locked" onclick="promptPassword('jumble')" id="card-jumble">
+                <div class="game-icon" style="background: linear-gradient(135deg, #5a9fd4, #73c67a);">🔀</div>
+                <div class="game-info">
+                    <h3>Tech Jumble</h3>
+                    <p>Unscramble words to solve the puzzle</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
             <div class="game-card locked" onclick="promptPassword('connections')" id="card-connections">
                 <div class="game-icon" style="background: linear-gradient(135deg, #f9df6d, #a06cd5);">🔗</div>
                 <div class="game-info">
@@ -1347,14 +1355,6 @@
                 <div class="game-info">
                     <h3>AI Flash Cards</h3>
                     <p>10 quick-fire AI term questions</p>
-                </div>
-                <div class="completion-badge">✓</div>
-            </div>
-            <div class="game-card locked" onclick="promptPassword('jumble')" id="card-jumble">
-                <div class="game-icon" style="background: linear-gradient(135deg, #5a9fd4, #73c67a);">🔀</div>
-                <div class="game-info">
-                    <h3>Tech Jumble</h3>
-                    <p>Unscramble words to solve the puzzle</p>
                 </div>
                 <div class="completion-badge">✓</div>
             </div>
@@ -1407,7 +1407,7 @@
                 <h2 class="game-title">Appliance Wordle</h2>
                 <span class="timer" id="timer-wordle">0:00</span>
             </div>
-            <p class="game-instructions">Guess the kitchen appliance word in 6 tries.</p>
+            <p class="game-instructions">Guess the 5-letter word in 6 tries.</p>
             <div class="wordle-grid" id="wordleGrid"></div>
             <div class="keyboard" id="keyboard"></div>
         </div>
@@ -1485,11 +1485,11 @@
 
         // Game passwords (change these!)
         const GAME_PASSWORDS = {
-            connections: 'badger1',
-            wordle: 'badger2',
-            crossword: 'badger3',
-            jumble: 'badger4',
-            millionaire: 'badger5'
+            jumble: 'luge',
+            connections: 'bobsled',
+            wordle: 'moguls',
+            crossword: 'slalom',
+            millionaire: 'curling'
         };
 
         const GAME_NAMES = {
@@ -1508,23 +1508,23 @@
         const connectionsData = {
             categories: [
                 {
-                    name: "UW-Madison Campus Spots",
-                    words: ["TERRACE", "UNION", "BASCOM", "MEMORIAL"],
+                    name: "Famous Tech Pioneers",
+                    words: ["DYSON", "GATES", "JOBS", "TURING"],
                     color: "category-0"
                 },
                 {
-                    name: "AI Business Buzzwords",
-                    words: ["CHATBOT", "MODEL", "TRAINING", "AGENT"],
+                    name: "UW-Madison Campus Icons",
+                    words: ["BADGER", "BASCOM", "STATE", "UNION"],
                     color: "category-1"
                 },
                 {
-                    name: "Coffee Maker Parts",
-                    words: ["FILTER", "CARAFE", "RESERVOIR", "BASKET"],
+                    name: "AI Terminology",
+                    words: ["BIAS", "MODEL", "PROMPT", "TOKENS"],
                     color: "category-2"
                 },
                 {
-                    name: "Hair Styling Tool Features",
-                    words: ["CERAMIC", "IONIC", "TITANIUM", "TOURMALINE"],
+                    name: "Verbs Associated with Appliances",
+                    words: ["BREW", "IRON", "BLEND", "STYLE"],
                     color: "category-3"
                 }
             ]
@@ -1533,28 +1533,28 @@
         // Wordle word - kitchen appliance
         const wordleAnswer = "MIXER";
 
-        // Flash Card data - 10 AI/tech terms with two plausible definitions
+        // Flash Card data - 10 AI/tech terms with three plausible definitions
         const flashCardData = [
-            { term: "LLM", choiceA: "Large Language Model", choiceB: "Low Latency Memory", correct: "A" },
-            { term: "GPU", choiceA: "General Purpose Utility", choiceB: "Graphics Processing Unit", correct: "B" },
-            { term: "NLP", choiceA: "Natural Language Processing", choiceB: "Network Layer Protocol", correct: "A" },
-            { term: "API", choiceA: "Automated Program Installation", choiceB: "Application Programming Interface", correct: "B" },
-            { term: "RAG", choiceA: "Retrieval Augmented Generation", choiceB: "Rapid Algorithm Growth", correct: "A" },
-            { term: "RLHF", choiceA: "Recursive Logic Hash Function", choiceB: "Reinforcement Learning from Human Feedback", correct: "B" },
-            { term: "CNN", choiceA: "Convolutional Neural Network", choiceB: "Central Node Nexus", correct: "A" },
-            { term: "GAN", choiceA: "Global Access Network", choiceB: "Generative Adversarial Network", correct: "B" },
-            { term: "IoT", choiceA: "Internet of Things", choiceB: "Integration of Technologies", correct: "A" },
-            { term: "BERT", choiceA: "Binary Encoding for Real-Time", choiceB: "Bidirectional Encoder Representations from Transformers", correct: "B" }
+            { term: "LLM", choiceA: "Large Language Model", choiceB: "Low Latency Memory", choiceC: "Linked Logic Machine", correct: "A" },
+            { term: "GPU", choiceA: "General Purpose Utility", choiceB: "Graphics Processing Unit", choiceC: "Global Parameter Update", correct: "B" },
+            { term: "NLP", choiceA: "Natural Language Processing", choiceB: "Network Layer Protocol", choiceC: "Neural Link Platform", correct: "A" },
+            { term: "API", choiceA: "Automated Program Installation", choiceB: "Application Programming Interface", choiceC: "Adaptive Processing Index", correct: "B" },
+            { term: "RAG", choiceA: "Retrieval Augmented Generation", choiceB: "Rapid Algorithm Growth", choiceC: "Recursive Analysis Gateway", correct: "A" },
+            { term: "RLHF", choiceA: "Recursive Logic Hash Function", choiceB: "Reinforcement Learning from Human Feedback", choiceC: "Real-time Low Frequency Handler", correct: "B" },
+            { term: "CNN", choiceA: "Convolutional Neural Network", choiceB: "Central Node Nexus", choiceC: "Cascading Neuron Notation", correct: "A" },
+            { term: "GAN", choiceA: "Global Access Network", choiceB: "Generative Adversarial Network", choiceC: "Grouped Attention Node", correct: "B" },
+            { term: "IoT", choiceA: "Internet of Things", choiceB: "Integration of Technologies", choiceC: "Intelligent Output Terminal", correct: "A" },
+            { term: "BERT", choiceA: "Binary Encoding for Real-Time", choiceB: "Bidirectional Encoder Representations from Transformers", choiceC: "Baseline Entity Recognition Tool", correct: "B" }
         ];
 
         // Jumble data
         const jumbleData = {
             words: [
-                { scrambled: "DRNBLEE", answer: "BLENDER" },
                 { scrambled: "HSAEVR", answer: "SHAVER" },
-                { scrambled: "PMORTP", answer: "PROMPT" },
-                { scrambled: "IONCGOK", answer: "COOKING" },
-                { scrambled: "TROROU", answer: "ROUTER" }
+                { scrambled: "PMCAUS", answer: "CAMPUS" },
+                { scrambled: "TLEETK", answer: "KETTLE" },
+                { scrambled: "GTNEA", answer: "AGENT" },
+                { scrambled: "NLRAE", answer: "LEARN" }
             ]
         };
 
@@ -1679,23 +1679,22 @@
                 const p = players[name];
                 const scores = {};
 
-                // Connections: (4 - mistakes) * 25, 0 if failed
+                // Connections: 1 category=50, 2=75, 3 or 4=100, 0=0
                 if (p.connections) {
-                    if (p.connections.failed) {
-                        scores.connections = 0;
-                    } else {
-                        const mistakes = p.connections.details?.Mistakes ?? 0;
-                        scores.connections = (4 - mistakes) * 25;
-                    }
+                    const solved = p.connections.details?.['Categories Solved'] ?? (p.connections.failed ? 0 : 4);
+                    if (solved === 0) scores.connections = 0;
+                    else if (solved === 1) scores.connections = 50;
+                    else if (solved === 2) scores.connections = 75;
+                    else scores.connections = 100;
                 }
 
-                // Wordle: ((7 - guesses) / 6) * 100, 0 if failed
+                // Wordle: based on correct letters in final guess (0-5 letters, scaled to 0-100)
                 if (p.wordle) {
                     if (p.wordle.failed) {
-                        scores.wordle = 0;
+                        const correctLetters = p.wordle.details?.['Correct Letters'] ?? 0;
+                        scores.wordle = Math.round((correctLetters / 5) * 100);
                     } else {
-                        const guesses = p.wordle.details?.Guesses ?? 6;
-                        scores.wordle = Math.round(((7 - guesses) / 6) * 100);
+                        scores.wordle = 100;
                     }
                 }
 
@@ -1765,10 +1764,10 @@
                 <div class="leaderboard-header">
                     <span>#</span>
                     <span>Player</span>
+                    <span>Jumble</span>
                     <span>Conn.</span>
                     <span>Wordle</span>
                     <span>Flash</span>
-                    <span>Jumble</span>
                     <span>Mill.</span>
                     <span>Total</span>
                     <span>Time</span>
@@ -1789,10 +1788,10 @@
                     <div class="leaderboard-row ${isCurrentPlayer ? 'highlight' : ''}">
                         <span><div class="rank-badge ${rankClass}">${idx + 1}</div></span>
                         <span>${player.name}</span>
+                        ${formatScore('jumble')}
                         ${formatScore('connections')}
                         ${formatScore('wordle')}
                         ${formatScore('crossword')}
-                        ${formatScore('jumble')}
                         ${formatScore('millionaire')}
                         <span class="total-cell">${player.total}</span>
                         <span class="score-cell">${player.totalTime > 0 ? Math.floor(player.totalTime / 60) + ':' + (player.totalTime % 60).toString().padStart(2, '0') : '-'}</span>
@@ -2196,7 +2195,7 @@
                 renderConnections();
 
                 if (connectionsState.solved.length === 4) {
-                    showCompletion('connections', 4 - connectionsState.mistakes + 1, { 'Mistakes': 4 - connectionsState.mistakes });
+                    showCompletion('connections', 100, { 'Mistakes': 4 - connectionsState.mistakes, 'Categories Solved': 4 });
                 }
             } else {
                 connectionsState.mistakes--;
@@ -2210,6 +2209,7 @@
 
                 if (connectionsState.mistakes === 0) {
                     showToast('Game Over!');
+                    const categoriesSolved = connectionsState.solved.length;
                     setTimeout(() => {
                         connectionsData.categories.forEach((cat, idx) => {
                             if (!connectionsState.solved.includes(idx)) {
@@ -2222,7 +2222,8 @@
                             }
                         });
                         renderConnections();
-                        setTimeout(() => showCompletion('connections', 0, { 'Mistakes': 4 }, false), 2000);
+                        const score = categoriesSolved === 0 ? 0 : categoriesSolved === 1 ? 50 : categoriesSolved === 2 ? 75 : 100;
+                        setTimeout(() => showCompletion('connections', score, { 'Mistakes': 4, 'Categories Solved': categoriesSolved }, false), 2000);
                     }, 1000);
                 }
             }
@@ -2386,8 +2387,13 @@
                 } else if (wordleState.currentRow === 5) {
                     wordleState.gameOver = true;
                     document.removeEventListener('keydown', handleWordleKey);
+                    // Count correct letters in final guess
+                    let correctLetters = 0;
+                    for (let i = 0; i < guess.length; i++) {
+                        if (guess[i] === answer[i]) correctLetters++;
+                    }
                     showToast(`The word was ${answer}`);
-                    setTimeout(() => showCompletion('wordle', 0, { 'Guesses': 6, 'Answer': answer }, false), 2000);
+                    setTimeout(() => showCompletion('wordle', correctLetters, { 'Guesses': 6, 'Answer': answer, 'Correct Letters': correctLetters }, false), 2000);
                 } else {
                     wordleState.currentRow++;
                     wordleState.currentGuess = '';
@@ -2429,6 +2435,9 @@
                     <button class="flashcard-choice-btn" onclick="selectFlashCardAnswer('B')">
                         <strong>B:</strong> ${card.choiceB}
                     </button>
+                    <button class="flashcard-choice-btn" onclick="selectFlashCardAnswer('C')">
+                        <strong>C:</strong> ${card.choiceC}
+                    </button>
                 </div>
                 <div class="flashcard-score">Score: ${flashCardState.correct}/${flashCardState.current}</div>
             `;
@@ -2447,13 +2456,10 @@
             const buttons = document.querySelectorAll('.flashcard-choice-btn');
             buttons.forEach(btn => btn.disabled = true);
 
-            if (card.correct === 'A') {
-                buttons[0].classList.add('correct');
-                if (choice === 'B') buttons[1].classList.add('wrong');
-            } else {
-                buttons[1].classList.add('correct');
-                if (choice === 'A') buttons[0].classList.add('wrong');
-            }
+            const correctIdx = { 'A': 0, 'B': 1, 'C': 2 }[card.correct];
+            const chosenIdx = { 'A': 0, 'B': 1, 'C': 2 }[choice];
+            buttons[correctIdx].classList.add('correct');
+            if (!isCorrect) buttons[chosenIdx].classList.add('wrong');
 
             // Auto-advance after 1s
             setTimeout(() => {
@@ -2638,10 +2644,20 @@
                 }
             });
 
+            const walkAwayPrize = millionaireState.currentQuestion > 0
+                ? millionaireQuestions[millionaireState.currentQuestion - 1].value
+                : '$0';
+            const wrongPrize = millionaireState.currentQuestion >= 5 ? '$2,000' : '$0';
+
             html += `</div>
                 </div>
 
-                <button class="btn btn-small walkaway-btn" onclick="walkAway()">Walk Away</button>
+                <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-small walkaway-btn" onclick="walkAway()">Walk Away (keep ${walkAwayPrize})</button>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.8rem; color: var(--gray-dark);">
+                    Wrong answer = drop to ${wrongPrize}
+                </div>
             `;
 
             container.innerHTML = html;
