@@ -1,0 +1,2762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MadAI Olympic Games | Badger Brain Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #c41e3a;
+            --badger-red: #c5050c;
+            --gold: #f7b731;
+            --success-green: #6aaa64;
+            --warning-yellow: #c9b458;
+            --gray-dark: #787c7e;
+            --gray-light: #d3d6da;
+            --bg-cream: #faf8f5;
+            --text-dark: #1a1a1a;
+            --category-purple: #a06cd5;
+            --category-blue: #5a9fd4;
+            --category-green: #73c67a;
+            --category-yellow: #f9df6d;
+            --millionaire-blue: #1a237e;
+            --millionaire-gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--badger-red), #e63946);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header .subtitle {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .header-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header-btn {
+            background: white;
+            border: 1px solid var(--gray-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            border-color: var(--badger-red);
+            color: var(--badger-red);
+        }
+
+        .player-name {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--badger-red);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .welcome-screen h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-screen p {
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+        }
+
+        .welcome-screen select {
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: white;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23787c7e' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            cursor: pointer;
+        }
+
+        .welcome-screen select:focus {
+            outline: none;
+            border-color: var(--badger-red);
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: var(--badger-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00408;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 5, 12, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--gray-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-dark);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Game Menu */
+        .game-menu {
+            display: none;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--badger-red);
+        }
+
+        .game-card.completed {
+            border-color: var(--success-green);
+        }
+
+        .game-card.completed .completion-badge {
+            display: flex;
+        }
+
+        .completion-badge {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--success-green);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .game-card.locked {
+            opacity: 0.7;
+        }
+
+        .game-card.locked::before {
+            content: '🔒';
+            position: absolute;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .game-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .game-info p {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Password Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: var(--gray-dark);
+            margin-bottom: 20px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: var(--badger-red);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .password-error {
+            color: var(--badger-red);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        /* Game Screens */
+        .game-screen {
+            display: none;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            touch-action: manipulation;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .timer {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--gray-dark);
+        }
+
+        .game-instructions {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* ============================================
+           GAME 1: BADGER CONNECTIONS
+           ============================================ */
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .connections-tile {
+            background: #efefe6;
+            padding: 15px 8px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.15s ease;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            touch-action: manipulation;
+        }
+
+        .connections-tile:hover {
+            transform: scale(1.02);
+        }
+
+        .connections-tile.selected {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .solved-group {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .solved-group h4 {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .solved-group p {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .category-0 { background: var(--category-yellow); }
+        .category-1 { background: var(--category-green); }
+        .category-2 { background: var(--category-blue); }
+        .category-3 { background: var(--category-purple); }
+
+        .connections-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mistakes-remaining {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .mistake-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-dark);
+            margin: 0 3px;
+        }
+
+        .mistake-dot.used {
+            background: var(--gray-light);
+        }
+
+        /* ============================================
+           GAME 2: APPLIANCE WORDLE
+           ============================================ */
+        .wordle-grid {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+            max-width: 330px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .wordle-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+        }
+
+        .wordle-cell {
+            width: 55px;
+            height: 55px;
+            border: 2px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: white;
+        }
+
+        .wordle-cell.filled {
+            border-color: var(--gray-dark);
+            animation: pop 0.1s ease;
+        }
+
+        .wordle-cell.correct {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            color: white;
+            animation: flip 0.5s ease;
+        }
+
+        .wordle-cell.present {
+            background: var(--warning-yellow);
+            border-color: var(--warning-yellow);
+            color: white;
+            animation: flip 0.5s ease;
+        }
+
+        .wordle-cell.absent {
+            background: var(--gray-dark);
+            border-color: var(--gray-dark);
+            color: white;
+            animation: flip 0.5s ease;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .keyboard-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .key {
+            padding: 15px 12px;
+            min-width: 30px;
+            border: none;
+            border-radius: 4px;
+            background: var(--gray-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
+            touch-action: manipulation;
+        }
+
+        .key:hover {
+            background: #c5c5c5;
+        }
+
+        .key.wide {
+            min-width: 55px;
+            font-size: 0.75rem;
+        }
+
+        .key.correct { background: var(--success-green); color: white; }
+        .key.present { background: var(--warning-yellow); color: white; }
+        .key.absent { background: var(--gray-dark); color: white; }
+
+        /* ============================================
+           GAME 3: AI FLASH CARDS
+           ============================================ */
+        .flashcard-container {
+            text-align: center;
+        }
+
+        .flashcard-progress {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .flashcard-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--gray-light);
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .flashcard-progress-fill {
+            height: 100%;
+            background: var(--badger-red);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .flashcard-term {
+            background: white;
+            padding: 40px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .flashcard-term h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--badger-red);
+            letter-spacing: 2px;
+        }
+
+        .flashcard-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .flashcard-choice-btn {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            touch-action: manipulation;
+        }
+
+        .flashcard-choice-btn:hover {
+            border-color: var(--badger-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .flashcard-choice-btn.correct {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            color: white;
+        }
+
+        .flashcard-choice-btn.wrong {
+            background: var(--badger-red);
+            border-color: var(--badger-red);
+            color: white;
+        }
+
+        .flashcard-choice-btn:disabled {
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .flashcard-score {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        /* ============================================
+           GAME 4: WORD JUMBLE
+           ============================================ */
+        .jumble-container {
+            text-align: center;
+        }
+
+        .jumble-word {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .jumble-word h4 {
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .jumble-letters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .jumble-letter {
+            width: 45px;
+            height: 50px;
+            background: var(--badger-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .jumble-letter:hover {
+            transform: translateY(-3px);
+            background: #a00408;
+        }
+
+        .jumble-letter.used {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .jumble-letter.used:hover {
+            transform: none;
+            background: var(--badger-red);
+        }
+
+        .jumble-answer {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .jumble-answer-slot {
+            width: 40px;
+            height: 45px;
+            border: 2px solid var(--gray-light);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: white;
+            cursor: pointer;
+        }
+
+        .jumble-answer-slot.filled {
+            border-color: var(--badger-red);
+            background: #fff5f5;
+        }
+
+        .jumble-answer-slot.correct {
+            border-color: var(--success-green);
+            background: #e8f5e9;
+            color: var(--success-green);
+        }
+
+        .jumble-scrambled {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: var(--badger-red);
+            margin-bottom: 15px;
+        }
+
+        .jumble-input-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .jumble-text-input {
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            text-align: center;
+            width: 180px;
+            max-width: 45vw;
+            letter-spacing: 2px;
+        }
+
+        .jumble-text-input:focus {
+            outline: none;
+            border-color: var(--badger-red);
+        }
+
+        .jumble-text-input.correct {
+            border-color: var(--success-green);
+            background: #e8f5e9;
+        }
+
+        .jumble-text-input:disabled {
+            background: #e8f5e9;
+            border-color: var(--success-green);
+            color: var(--success-green);
+        }
+
+        .jumble-submit-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .jumble-submit-section p {
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           GAME 5: WHO WANTS TO BE A MILLIONAIRE
+           ============================================ */
+        .millionaire-container {
+            text-align: center;
+        }
+
+        .millionaire-header {
+            background: linear-gradient(135deg, var(--millionaire-blue), #303f9f);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .millionaire-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .prize-display {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--millionaire-gold);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .prize-ladder {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 25px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .prize-rung {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .prize-rung.current {
+            background: var(--millionaire-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .prize-rung.passed {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .prize-rung.milestone {
+            font-weight: 700;
+        }
+
+        .question-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .answer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .answer-option {
+            padding: 18px 15px;
+            background: linear-gradient(135deg, #1a237e, #303f9f);
+            color: white;
+            border: 2px solid var(--millionaire-gold);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: left;
+            touch-action: manipulation;
+        }
+
+        .answer-option:hover {
+            background: linear-gradient(135deg, #303f9f, #3f51b5);
+            transform: translateY(-2px);
+        }
+
+        .answer-option span {
+            color: var(--millionaire-gold);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .answer-option.selected {
+            background: var(--warning-yellow);
+            color: var(--text-dark);
+            border-color: var(--warning-yellow);
+        }
+
+        .answer-option.correct {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            animation: pulse 0.5s ease;
+        }
+
+        .answer-option.wrong {
+            background: var(--badger-red);
+            border-color: var(--badger-red);
+            animation: shake 0.5s ease;
+        }
+
+        .lifelines {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .lifeline {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--millionaire-gold), #ffa000);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            touch-action: manipulation;
+        }
+
+        .lifeline:hover {
+            transform: scale(1.1);
+        }
+
+        .lifeline.used {
+            background: var(--gray-light);
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        .lifeline.used:hover {
+            transform: none;
+        }
+
+        .walkaway-btn {
+            background: #ff6b6b;
+            margin-top: 15px;
+        }
+
+        /* ============================================
+           LEADERBOARD
+           ============================================ */
+        .leaderboard-screen {
+            display: none;
+        }
+
+        .leaderboard-table {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .leaderboard-header {
+            display: grid;
+            grid-template-columns: 40px 1fr 55px 55px 55px 55px 55px 60px 55px;
+            background: var(--text-dark);
+            color: white;
+            padding: 12px 10px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            min-width: 550px;
+        }
+
+        .leaderboard-row {
+            display: grid;
+            grid-template-columns: 40px 1fr 55px 55px 55px 55px 55px 60px 55px;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 0.8rem;
+            align-items: center;
+            min-width: 550px;
+        }
+
+        .leaderboard-row .score-cell {
+            text-align: center;
+        }
+
+        .leaderboard-row .score-cell.failed {
+            color: var(--gray-light);
+        }
+
+        .leaderboard-row .total-cell {
+            font-weight: 700;
+            text-align: center;
+            color: var(--badger-red);
+        }
+
+        .leaderboard-row:last-child {
+            border-bottom: none;
+        }
+
+        .leaderboard-row.highlight {
+            background: #fff5f5;
+        }
+
+        .rank-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .rank-1 { background: var(--millionaire-gold); color: #333; }
+        .rank-2 { background: #c0c0c0; color: #333; }
+        .rank-3 { background: #cd7f32; color: white; }
+
+        .no-scores {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray-dark);
+        }
+
+        /* ============================================
+           COMPLETION & RESULTS
+           ============================================ */
+        .completion-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .completion-screen h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .completion-screen .emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--badger-red);
+        }
+
+        .stat-box .label {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+
+        .all-complete {
+            background: linear-gradient(135deg, var(--badger-red), #e63946);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+
+        .all-complete h2 {
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes flip {
+            0% { transform: rotateX(0); }
+            50% { transform: rotateX(90deg); }
+            100% { transform: rotateX(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .celebrate {
+            animation: bounce 0.5s ease;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-dark);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Confetti container */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .connections-tile {
+                font-size: 0.65rem;
+                padding: 10px 4px;
+                min-height: 50px;
+            }
+
+            .wordle-cell {
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
+            }
+
+            .flashcard-term h3 {
+                font-size: 1.6rem;
+            }
+
+            .flashcard-choice-btn {
+                padding: 16px 20px;
+                font-size: 0.95rem;
+            }
+
+            .answer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .jumble-letter {
+                width: 38px;
+                height: 42px;
+                font-size: 1.2rem;
+            }
+
+            .jumble-text-input {
+                width: 140px;
+                max-width: 40vw;
+            }
+
+            .prize-ladder {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script>
+        // =============================================
+        // FIREBASE CONFIG — Replace with your own!
+        // =============================================
+        // 1. Go to https://console.firebase.google.com/
+        // 2. Create a new project (or use existing)
+        // 3. Add a Web app, copy the config object here
+        // 4. Go to Realtime Database > Create Database > Start in TEST MODE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlQ0UUlsknuWoyWwFZFVqw50PFJNVlouk",
+            authDomain: "madai-olympic-games.firebaseapp.com",
+            databaseURL: "https://madai-olympic-games-default-rtdb.firebaseio.com",
+            projectId: "madai-olympic-games",
+            storageBucket: "madai-olympic-games.firebasestorage.app",
+            messagingSenderId: "729656833496",
+            appId: "1:729656833496:web:f458d78599c203e3ab6ead"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+    </script>
+    <div class="container">
+        <header>
+            <h1>MadAI Olympic Games</h1>
+            <p class="subtitle">Where Badger Spirit Meets Artificial Intelligence</p>
+            <div class="header-icons" id="headerIcons" style="display: none;">
+                <button class="header-btn" onclick="backToNameSelect()">
+                    ← Change Name
+                </button>
+                <button class="header-btn" onclick="showLeaderboard()">
+                    🏆 Leaderboard
+                </button>
+            </div>
+            <div class="player-name" id="playerNameDisplay" style="display: none;"></div>
+        </header>
+
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <h2>Welcome, Puzzle Solver!</h2>
+            <p>Five brain-teasing games where AI meets Badger pride.<br>Select your name to begin.</p>
+            <select id="playerNameInput">
+                <option value="" disabled selected>Select your name...</option>
+                <option value="Alan McDonald">Alan McDonald</option>
+                <option value="Andrea Wyant">Andrea Wyant</option>
+                <option value="Baylee Willard">Baylee Willard</option>
+                <option value="Ben Steenstry">Ben Steenstry</option>
+                <option value="Bob Jacus">Bob Jacus</option>
+                <option value="Brady Kuzia">Brady Kuzia</option>
+                <option value="Chris Hagen">Chris Hagen</option>
+                <option value="Christoph Zickler">Christoph Zickler</option>
+                <option value="Cierra Lowery">Cierra Lowery</option>
+                <option value="Dan Rosati">Dan Rosati</option>
+                <option value="Daniel Burkhardt">Daniel Burkhardt</option>
+                <option value="Doug Gebauer">Doug Gebauer</option>
+                <option value="Elaine Yu">Elaine Yu</option>
+                <option value="Erin Horn">Erin Horn</option>
+                <option value="Firdaus Nandoliya">Firdaus Nandoliya</option>
+                <option value="Furrukh Hussain">Furrukh Hussain</option>
+                <option value="Jacque Koyen">Jacque Koyen</option>
+                <option value="Jay Kuzia">Jay Kuzia</option>
+                <option value="Joel Norris">Joel Norris</option>
+                <option value="Jon Pica">Jon Pica</option>
+                <option value="Jordan Ripp">Jordan Ripp</option>
+                <option value="Josh King">Josh King</option>
+                <option value="Justin Chaudoir">Justin Chaudoir</option>
+                <option value="Katelyn Lueck">Katelyn Lueck</option>
+                <option value="Katie Gaertner">Katie Gaertner</option>
+                <option value="Keith Reynolds">Keith Reynolds</option>
+                <option value="Kroy Nernberger">Kroy Nernberger</option>
+                <option value="Lydia Morris">Lydia Morris</option>
+                <option value="Marcia Bole">Marcia Bole</option>
+                <option value="Matt Mikelson">Matt Mikelson</option>
+                <option value="Matt Quock">Matt Quock</option>
+                <option value="Matt Richison">Matt Richison</option>
+                <option value="Matt Seitz">Matt Seitz</option>
+                <option value="Mike Degrood">Mike Degrood</option>
+                <option value="Mike Murzynski">Mike Murzynski</option>
+                <option value="Peter Steiner">Peter Steiner</option>
+                <option value="Rachel Koebler">Rachel Koebler</option>
+                <option value="Rebecca Schultz">Rebecca Schultz</option>
+                <option value="Rolando Cavazos">Rolando Cavazos</option>
+                <option value="Ryan Asche">Ryan Asche</option>
+                <option value="Steve Kupcho">Steve Kupcho</option>
+                <option value="Terry Willemin">Terry Willemin</option>
+                <option value="Tom Baumgard">Tom Baumgard</option>
+                <option value="Tom Cole">Tom Cole</option>
+                <option value="Tyler Stridiron">Tyler Stridiron</option>
+                <option value="Vignesh Pirathaban">Vignesh Pirathaban</option>
+            </select>
+            <br>
+            <button class="btn btn-primary" onclick="startGame()">Let's Play!</button>
+        </div>
+
+        <!-- Game Menu -->
+        <div class="game-menu" id="gameMenu">
+            <div class="game-card locked" onclick="promptPassword('connections')" id="card-connections">
+                <div class="game-icon" style="background: linear-gradient(135deg, #f9df6d, #a06cd5);">🔗</div>
+                <div class="game-info">
+                    <h3>Badger Connections</h3>
+                    <p>Group 16 words into 4 secret categories</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
+            <div class="game-card locked" onclick="promptPassword('wordle')" id="card-wordle">
+                <div class="game-icon" style="background: linear-gradient(135deg, #6aaa64, #c9b458);">📝</div>
+                <div class="game-info">
+                    <h3>Appliance Wordle</h3>
+                    <p>Guess the 5-letter appliance word</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
+            <div class="game-card locked" onclick="promptPassword('crossword')" id="card-crossword">
+                <div class="game-icon" style="background: linear-gradient(135deg, #c5050c, #f7b731);">🧠</div>
+                <div class="game-info">
+                    <h3>AI Flash Cards</h3>
+                    <p>10 quick-fire AI term questions</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
+            <div class="game-card locked" onclick="promptPassword('jumble')" id="card-jumble">
+                <div class="game-icon" style="background: linear-gradient(135deg, #5a9fd4, #73c67a);">🔀</div>
+                <div class="game-info">
+                    <h3>Tech Jumble</h3>
+                    <p>Unscramble words to solve the puzzle</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
+            <div class="game-card locked" onclick="promptPassword('millionaire')" id="card-millionaire">
+                <div class="game-icon" style="background: linear-gradient(135deg, #1a237e, #ffd700);">💰</div>
+                <div class="game-info">
+                    <h3>MillionAIre</h3>
+                    <p>10 AI trivia questions to the top!</p>
+                </div>
+                <div class="completion-badge">✓</div>
+            </div>
+        </div>
+
+        <!-- Password Modal -->
+        <div class="modal-overlay" id="passwordModal">
+            <div class="modal">
+                <h3>🔒 Enter Password</h3>
+                <p id="modalGameName">Badger Connections</p>
+                <p class="password-error" id="passwordError">Incorrect password. Try again.</p>
+                <input type="text" id="passwordInput" placeholder="Enter game password">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary btn-small" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary btn-small" onclick="submitPassword()">Enter</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game 1: Badger Connections -->
+        <div class="game-screen" id="game-connections">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">Badger Connections</h2>
+                <span class="timer" id="timer-connections">0:00</span>
+            </div>
+            <p class="game-instructions">Find groups of 4 words that share something in common. Beware—some words fit multiple categories!</p>
+            <div id="solvedGroups"></div>
+            <div class="connections-grid" id="connectionsGrid"></div>
+            <div class="mistakes-remaining" id="mistakesDisplay"></div>
+            <div class="connections-controls">
+                <button class="btn btn-secondary btn-small" onclick="shuffleConnections()">Shuffle</button>
+                <button class="btn btn-secondary btn-small" onclick="deselectAll()">Deselect</button>
+                <button class="btn btn-primary btn-small" onclick="submitConnections()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Game 2: Appliance Wordle -->
+        <div class="game-screen" id="game-wordle">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">Appliance Wordle</h2>
+                <span class="timer" id="timer-wordle">0:00</span>
+            </div>
+            <p class="game-instructions">Guess the kitchen appliance word in 6 tries.</p>
+            <div class="wordle-grid" id="wordleGrid"></div>
+            <div class="keyboard" id="keyboard"></div>
+        </div>
+
+        <!-- Game 3: AI Flash Cards -->
+        <div class="game-screen" id="game-crossword">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">🧠 AI Flash Cards</h2>
+                <span class="timer" id="timer-crossword">0:00</span>
+            </div>
+            <p class="game-instructions">Choose the correct definition for each AI term. How many can you get right?</p>
+            <div class="flashcard-container" id="flashcardContainer"></div>
+        </div>
+
+        <!-- Game 4: Word Jumble -->
+        <div class="game-screen" id="game-jumble">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">Tech Jumble</h2>
+                <span class="timer" id="timer-jumble">0:00</span>
+            </div>
+            <p class="game-instructions">Unscramble the words! Submit your score when you're ready.</p>
+            <div class="jumble-container" id="jumbleContainer"></div>
+        </div>
+
+        <!-- Game 5: Who Wants to be a MillionAIre -->
+        <div class="game-screen" id="game-millionaire">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">MillionAIre</h2>
+                <span class="timer" id="timer-millionaire">0:00</span>
+            </div>
+            <div class="millionaire-container" id="millionaireContainer"></div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div class="leaderboard-screen" id="leaderboardScreen">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">←</button>
+                <h2 class="game-title">🏆 Leaderboard</h2>
+                <span></span>
+            </div>
+            <div class="leaderboard-table" id="leaderboardTable"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-secondary btn-small" onclick="promptClearLeaderboard()" style="color: #999; border-color: #ddd; font-size: 0.75rem;">Clear All Data</button>
+            </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="game-screen" id="completionScreen">
+            <div class="completion-screen">
+                <div class="emoji" id="completionEmoji">🎉</div>
+                <h2 id="completionTitle">Puzzle Complete!</h2>
+                <p id="completionMessage"></p>
+                <div class="stats-grid" id="completionStats"></div>
+                <button class="btn btn-primary" onclick="backToMenu()">Continue Playing</button>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+        <div class="confetti-container" id="confetti"></div>
+    </div>
+
+    <script>
+        // ============================================
+        // GLOBAL STATE
+        // ============================================
+        let playerName = '';
+        let completedGames = {};
+        let currentGame = null;
+        let gameTimers = {};
+        let gameStartTimes = {};
+        let pendingGame = null;
+
+        // Game passwords (change these!)
+        const GAME_PASSWORDS = {
+            connections: 'badger1',
+            wordle: 'badger2',
+            crossword: 'badger3',
+            jumble: 'badger4',
+            millionaire: 'badger5'
+        };
+
+        const GAME_NAMES = {
+            connections: 'Badger Connections',
+            wordle: 'Appliance Wordle',
+            crossword: 'AI Flash Cards',
+            jumble: 'Tech Jumble',
+            millionaire: 'MillionAIre'
+        };
+
+        // ============================================
+        // GAME DATA (NO REPEATS ACROSS GAMES)
+        // ============================================
+
+        // Connections data - words that could fit multiple categories
+        const connectionsData = {
+            categories: [
+                {
+                    name: "UW-Madison Campus Spots",
+                    words: ["TERRACE", "UNION", "BASCOM", "MEMORIAL"],
+                    color: "category-0"
+                },
+                {
+                    name: "AI Business Buzzwords",
+                    words: ["CHATBOT", "MODEL", "TRAINING", "AGENT"],
+                    color: "category-1"
+                },
+                {
+                    name: "Coffee Maker Parts",
+                    words: ["FILTER", "CARAFE", "RESERVOIR", "BASKET"],
+                    color: "category-2"
+                },
+                {
+                    name: "Hair Styling Tool Features",
+                    words: ["CERAMIC", "IONIC", "TITANIUM", "TOURMALINE"],
+                    color: "category-3"
+                }
+            ]
+        };
+
+        // Wordle word - kitchen appliance
+        const wordleAnswer = "MIXER";
+
+        // Flash Card data - 10 AI/tech terms with two plausible definitions
+        const flashCardData = [
+            { term: "LLM", choiceA: "Large Language Model", choiceB: "Low Latency Memory", correct: "A" },
+            { term: "GPU", choiceA: "General Purpose Utility", choiceB: "Graphics Processing Unit", correct: "B" },
+            { term: "NLP", choiceA: "Natural Language Processing", choiceB: "Network Layer Protocol", correct: "A" },
+            { term: "API", choiceA: "Automated Program Installation", choiceB: "Application Programming Interface", correct: "B" },
+            { term: "RAG", choiceA: "Retrieval Augmented Generation", choiceB: "Rapid Algorithm Growth", correct: "A" },
+            { term: "RLHF", choiceA: "Recursive Logic Hash Function", choiceB: "Reinforcement Learning from Human Feedback", correct: "B" },
+            { term: "CNN", choiceA: "Convolutional Neural Network", choiceB: "Central Node Nexus", correct: "A" },
+            { term: "GAN", choiceA: "Global Access Network", choiceB: "Generative Adversarial Network", correct: "B" },
+            { term: "IoT", choiceA: "Internet of Things", choiceB: "Integration of Technologies", correct: "A" },
+            { term: "BERT", choiceA: "Binary Encoding for Real-Time", choiceB: "Bidirectional Encoder Representations from Transformers", correct: "B" }
+        ];
+
+        // Jumble data
+        const jumbleData = {
+            words: [
+                { scrambled: "DRNBLEE", answer: "BLENDER" },
+                { scrambled: "HSAEVR", answer: "SHAVER" },
+                { scrambled: "PMORTP", answer: "PROMPT" },
+                { scrambled: "IONCGOK", answer: "COOKING" },
+                { scrambled: "TROROU", answer: "ROUTER" }
+            ]
+        };
+
+        // MillionAIre questions (10 questions, increasing difficulty)
+        const millionaireQuestions = [
+            {
+                question: "What does 'AI' stand for?",
+                options: ["Artificial Intelligence", "Automated Input", "Advanced Integration", "Algorithm Interface"],
+                correct: 0,
+                value: "$100"
+            },
+            {
+                question: "Which company created ChatGPT?",
+                options: ["Google", "Microsoft", "OpenAI", "Meta"],
+                correct: 2,
+                value: "$200"
+            },
+            {
+                question: "What is a 'hallucination' in AI context?",
+                options: ["A visual glitch", "Generating false information", "Overheating hardware", "Running out of memory"],
+                correct: 1,
+                value: "$500"
+            },
+            {
+                question: "What type of AI model is GPT?",
+                options: ["Image classifier", "Large Language Model", "Search engine", "Database"],
+                correct: 1,
+                value: "$1,000"
+            },
+            {
+                question: "What does 'LLM' stand for?",
+                options: ["Large Learning Machine", "Linear Logic Model", "Large Language Model", "Low Latency Module"],
+                correct: 2,
+                value: "$2,000"
+            },
+            {
+                question: "Which technique trains AI using human feedback?",
+                options: ["RLHF", "CNN", "RNN", "SQL"],
+                correct: 0,
+                value: "$4,000"
+            },
+            {
+                question: "What is the 'temperature' parameter in AI?",
+                options: ["Hardware heat level", "Response randomness control", "Processing speed", "Memory usage"],
+                correct: 1,
+                value: "$8,000"
+            },
+            {
+                question: "What is a 'token' in language models?",
+                options: ["A security key", "A piece of text (word/subword)", "A hardware chip", "A training example"],
+                correct: 1,
+                value: "$16,000"
+            },
+            {
+                question: "What does 'fine-tuning' mean in AI?",
+                options: ["Adjusting volume", "Training on specific data after pre-training", "Reducing model size", "Fixing bugs"],
+                correct: 1,
+                value: "$32,000"
+            },
+            {
+                question: "What is the 'Turing Test' designed to evaluate?",
+                options: ["Processing speed", "Machine's ability to exhibit human-like intelligence", "Memory capacity", "Energy efficiency"],
+                correct: 1,
+                value: "$1 MILLION"
+            }
+        ];
+
+        // ============================================
+        // LEADERBOARD (Firebase-backed)
+        // ============================================
+        let cachedLeaderboard = [];
+
+        function getLeaderboard() {
+            return cachedLeaderboard;
+        }
+
+        // Load leaderboard from Firebase once, then listen for updates
+        function initLeaderboardListener() {
+            db.ref('madai/leaderboard').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    cachedLeaderboard = Object.values(data);
+                } else {
+                    cachedLeaderboard = [];
+                }
+                // If leaderboard screen is currently visible, refresh it
+                if (document.getElementById('leaderboardScreen').style.display === 'block') {
+                    showLeaderboard();
+                }
+            });
+        }
+
+        function saveToLeaderboard(game, score, time, details = {}, failed = false) {
+            const entry = {
+                name: playerName,
+                game: game,
+                score: score,
+                time: time,
+                details: details,
+                failed: failed,
+                timestamp: Date.now()
+            };
+            // Push to Firebase
+            db.ref('madai/leaderboard').push(entry);
+        }
+
+        function calculatePlayerScores() {
+            const leaderboard = getLeaderboard();
+            const players = {};
+
+            leaderboard.forEach(entry => {
+                if (!players[entry.name]) {
+                    players[entry.name] = {};
+                }
+                // Keep best (latest) entry per game per player
+                players[entry.name][entry.game] = entry;
+            });
+
+            const results = [];
+
+            Object.keys(players).forEach(name => {
+                const p = players[name];
+                const scores = {};
+
+                // Connections: (4 - mistakes) * 25, 0 if failed
+                if (p.connections) {
+                    if (p.connections.failed) {
+                        scores.connections = 0;
+                    } else {
+                        const mistakes = p.connections.details?.Mistakes ?? 0;
+                        scores.connections = (4 - mistakes) * 25;
+                    }
+                }
+
+                // Wordle: ((7 - guesses) / 6) * 100, 0 if failed
+                if (p.wordle) {
+                    if (p.wordle.failed) {
+                        scores.wordle = 0;
+                    } else {
+                        const guesses = p.wordle.details?.Guesses ?? 6;
+                        scores.wordle = Math.round(((7 - guesses) / 6) * 100);
+                    }
+                }
+
+                // Flash Cards: use percentage directly (0-100)
+                if (p.crossword) {
+                    if (p.crossword.failed) {
+                        scores.crossword = 0;
+                    } else {
+                        scores.crossword = p.crossword.details?.Percentage ?? 0;
+                    }
+                }
+
+                // Jumble: (words solved / 5) * 100
+                if (p.jumble) {
+                    scores.jumble = p.jumble.score ?? 0;
+                }
+
+                // Millionaire: (questions / 10) * 100
+                if (p.millionaire) {
+                    if (p.millionaire.failed) {
+                        const q = p.millionaire.details?.Questions ?? 0;
+                        scores.millionaire = Math.round((q / 10) * 100);
+                    } else {
+                        const q = p.millionaire.details?.Questions ?? 0;
+                        scores.millionaire = Math.round((q / 10) * 100);
+                    }
+                }
+
+                // Total: weighted 20% each, only count games played
+                const gameKeys = ['connections', 'wordle', 'crossword', 'jumble', 'millionaire'];
+                let total = 0;
+                gameKeys.forEach(g => {
+                    if (scores[g] !== undefined) {
+                        total += scores[g] * 0.2;
+                    }
+                });
+
+                // Total time across all games (for tiebreaker, lower is better)
+                let totalTime = 0;
+                gameKeys.forEach(g => {
+                    if (p[g] && p[g].time) {
+                        totalTime += p[g].time;
+                    }
+                });
+
+                results.push({ name, scores, total: Math.round(total), totalTime });
+            });
+
+            // Sort by total score descending, then total time ascending as tiebreaker
+            results.sort((a, b) => b.total - a.total || a.totalTime - b.totalTime);
+            return results;
+        }
+
+        function showLeaderboard() {
+            document.getElementById('gameMenu').style.display = 'none';
+            document.getElementById('leaderboardScreen').style.display = 'block';
+
+            const playerScores = calculatePlayerScores();
+            const table = document.getElementById('leaderboardTable');
+
+            if (playerScores.length === 0) {
+                table.innerHTML = '<div class="no-scores">No scores yet. Be the first!</div>';
+                return;
+            }
+
+            let html = `
+                <div class="leaderboard-header">
+                    <span>#</span>
+                    <span>Player</span>
+                    <span>Conn.</span>
+                    <span>Wordle</span>
+                    <span>Flash</span>
+                    <span>Jumble</span>
+                    <span>Mill.</span>
+                    <span>Total</span>
+                    <span>Time</span>
+                </div>
+            `;
+
+            playerScores.forEach((player, idx) => {
+                const isCurrentPlayer = player.name === playerName;
+                const rankClass = idx < 3 ? `rank-${idx + 1}` : '';
+
+                const formatScore = (game) => {
+                    if (player.scores[game] === undefined) return '<span class="score-cell" style="color:#ccc">-</span>';
+                    if (player.scores[game] === 0) return `<span class="score-cell failed">0</span>`;
+                    return `<span class="score-cell">${player.scores[game]}</span>`;
+                };
+
+                html += `
+                    <div class="leaderboard-row ${isCurrentPlayer ? 'highlight' : ''}">
+                        <span><div class="rank-badge ${rankClass}">${idx + 1}</div></span>
+                        <span>${player.name}</span>
+                        ${formatScore('connections')}
+                        ${formatScore('wordle')}
+                        ${formatScore('crossword')}
+                        ${formatScore('jumble')}
+                        ${formatScore('millionaire')}
+                        <span class="total-cell">${player.total}</span>
+                        <span class="score-cell">${player.totalTime > 0 ? Math.floor(player.totalTime / 60) + ':' + (player.totalTime % 60).toString().padStart(2, '0') : '-'}</span>
+                    </div>
+                `;
+            });
+
+            table.innerHTML = html;
+        }
+
+        function promptClearLeaderboard() {
+            const pw = prompt('Enter admin password to clear all data:');
+            if (pw === null) return;
+            if (pw === 'Lucy') {
+                // Clear all Firebase data
+                db.ref('madai').remove();
+                // Reset current session
+                completedGames = {};
+                cachedLeaderboard = [];
+                updateMenuCards();
+                showToast('All data cleared!');
+                showLeaderboard();
+            } else {
+                showToast('Incorrect password');
+            }
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        function startGame() {
+            const select = document.getElementById('playerNameInput');
+            playerName = select.value;
+            if (!playerName) {
+                showToast('Please select your name');
+                return;
+            }
+
+            // Load completed games from Firebase
+            const safeKey = playerName.replace(/[.#$\/\[\]]/g, '_');
+
+            function enterGameMenu() {
+                document.getElementById('welcomeScreen').style.display = 'none';
+                document.getElementById('gameMenu').style.display = 'block';
+                document.getElementById('headerIcons').style.display = 'flex';
+                document.getElementById('playerNameDisplay').textContent = `Playing as: ${playerName}`;
+                document.getElementById('playerNameDisplay').style.display = 'inline-block';
+                updateMenuCards();
+            }
+
+            db.ref(`madai/completed/${safeKey}`).once('value').then((snapshot) => {
+                const data = snapshot.val();
+                completedGames = data || {};
+                enterGameMenu();
+            }).catch((err) => {
+                console.error('Firebase load error:', err);
+                completedGames = {};
+                enterGameMenu();
+            });
+        }
+
+        function backToNameSelect() {
+            // Stop any running timers
+            if (currentGame && gameTimers[currentGame]) {
+                clearInterval(gameTimers[currentGame]);
+            }
+            currentGame = null;
+
+            // Hide everything, show welcome screen
+            document.getElementById('gameMenu').style.display = 'none';
+            document.getElementById('leaderboardScreen').style.display = 'none';
+            document.querySelectorAll('.game-screen').forEach(s => s.style.display = 'none');
+            document.getElementById('headerIcons').style.display = 'none';
+            document.getElementById('playerNameDisplay').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'block';
+
+            // Remove all-complete banner if present
+            const allCompleteEl = document.querySelector('.all-complete');
+            if (allCompleteEl) allCompleteEl.remove();
+
+            playerName = '';
+            completedGames = {};
+        }
+
+        function promptPassword(game) {
+            if (completedGames[game]) {
+                showToast('Already completed!');
+                return;
+            }
+
+            pendingGame = game;
+            document.getElementById('modalGameName').textContent = GAME_NAMES[game];
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('passwordModal').classList.add('show');
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').classList.remove('show');
+            pendingGame = null;
+        }
+
+        function submitPassword() {
+            const input = document.getElementById('passwordInput').value.trim().toLowerCase();
+            if (input === GAME_PASSWORDS[pendingGame]) {
+                const game = pendingGame;
+                closeModal();
+                loadGame(game);
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitPassword();
+        });
+
+        function backToMenu() {
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById('leaderboardScreen').style.display = 'none';
+            document.getElementById('gameMenu').style.display = 'block';
+
+            if (currentGame && gameTimers[currentGame]) {
+                clearInterval(gameTimers[currentGame]);
+            }
+            currentGame = null;
+
+            updateMenuCards();
+        }
+
+        function updateMenuCards() {
+            const allGames = ['connections', 'wordle', 'crossword', 'jumble', 'millionaire'];
+            allGames.forEach(game => {
+                const card = document.getElementById(`card-${game}`);
+                if (completedGames[game]) {
+                    card.classList.add('completed');
+                    card.classList.remove('locked');
+                } else {
+                    card.classList.remove('completed');
+                    card.classList.add('locked');
+                }
+            });
+
+            // Remove all-complete banner if games were reset
+            const allCompleteEl = document.querySelector('.all-complete');
+            if (allCompleteEl && Object.keys(completedGames).length < 5) {
+                allCompleteEl.remove();
+            }
+
+            if (Object.keys(completedGames).length === 5) {
+                showAllComplete();
+            }
+        }
+
+        function loadGame(game) {
+            document.getElementById('gameMenu').style.display = 'none';
+            document.getElementById(`game-${game}`).style.display = 'block';
+            currentGame = game;
+
+            gameStartTimes[game] = Date.now();
+            startTimer(game);
+
+            switch(game) {
+                case 'connections': initConnections(); break;
+                case 'wordle': initWordle(); break;
+                case 'crossword': initFlashCards(); break;
+                case 'jumble': initJumble(); break;
+                case 'millionaire': initMillionaire(); break;
+            }
+        }
+
+        function startTimer(game) {
+            const timerEl = document.getElementById(`timer-${game}`);
+            if (gameTimers[game]) clearInterval(gameTimers[game]);
+
+            gameTimers[game] = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - gameStartTimes[game]) / 1000);
+                const mins = Math.floor(elapsed / 60);
+                const secs = elapsed % 60;
+                timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function showConfetti() {
+            const container = document.getElementById('confetti');
+            const colors = ['#c5050c', '#f7b731', '#6aaa64', '#5a9fd4', '#a06cd5', '#ffd700'];
+
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                container.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function showCompletion(game, score, stats, success = true) {
+            clearInterval(gameTimers[game]);
+            completedGames[game] = true;
+
+            // Persist completed games to Firebase
+            const safeKey = playerName.replace(/[.#$\/\[\]]/g, '_');
+            db.ref(`madai/completed/${safeKey}`).set(completedGames);
+
+            const elapsed = Math.floor((Date.now() - gameStartTimes[game]) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+
+            // Save to leaderboard
+            saveToLeaderboard(game, score, elapsed, stats, !success);
+
+            setTimeout(() => {
+                document.getElementById(`game-${game}`).style.display = 'none';
+                document.getElementById('completionScreen').style.display = 'block';
+
+                if (success) {
+                    const emojis = ['🎉', '🏆', '⭐', '🎊', '✨', '🦡'];
+                    document.getElementById('completionEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+                    const titles = {
+                        connections: 'Connections Master!',
+                        wordle: 'Word Wizard!',
+                        crossword: 'Flash Card Ace!',
+                        jumble: 'Jumble Genius!',
+                        millionaire: 'AI Millionaire!'
+                    };
+                    document.getElementById('completionTitle').textContent = titles[game];
+                    document.getElementById('completionMessage').textContent = `Great job, ${playerName}! On, Wisconsin! 🦡`;
+                } else {
+                    document.getElementById('completionEmoji').textContent = '😞';
+
+                    const failTitles = {
+                        connections: 'Connections - Game Over',
+                        wordle: 'Wordle - Game Over',
+                        crossword: 'Flash Cards - Game Over',
+                        jumble: 'Jumble - Game Over',
+                        millionaire: 'MillionAIre - Game Over'
+                    };
+                    document.getElementById('completionTitle').textContent = failTitles[game];
+                    document.getElementById('completionMessage').textContent = `Better luck next time, ${playerName}!`;
+                }
+
+                let statsHTML = `
+                    <div class="stat-box">
+                        <div class="number">${mins}:${secs.toString().padStart(2, '0')}</div>
+                        <div class="label">Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">${Object.keys(completedGames).length}/5</div>
+                        <div class="label">Games Done</div>
+                    </div>
+                `;
+
+                if (stats) {
+                    for (const [label, value] of Object.entries(stats)) {
+                        statsHTML += `
+                            <div class="stat-box">
+                                <div class="number">${value}</div>
+                                <div class="label">${label}</div>
+                            </div>
+                        `;
+                    }
+                }
+
+                document.getElementById('completionStats').innerHTML = statsHTML;
+                if (success) showConfetti();
+            }, 800);
+        }
+
+        function showAllComplete() {
+            const menu = document.getElementById('gameMenu');
+            if (!document.querySelector('.all-complete')) {
+                const allComplete = document.createElement('div');
+                allComplete.className = 'all-complete';
+                allComplete.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🏆🦡🤖</div>
+                    <h2>All Puzzles Complete!</h2>
+                    <p style="margin-top: 10px; opacity: 0.9;">
+                        Congratulations, ${playerName}!<br>
+                        You've mastered all 5 MadAI Olympic Games!<br><br>
+                        <strong>On, Wisconsin!</strong>
+                    </p>
+                `;
+                menu.appendChild(allComplete);
+            }
+        }
+
+        // ============================================
+        // GAME 1: BADGER CONNECTIONS
+        // ============================================
+        let connectionsState = {
+            selected: [],
+            solved: [],
+            mistakes: 4,
+            tiles: []
+        };
+
+        function initConnections() {
+            connectionsState = { selected: [], solved: [], mistakes: 4, tiles: [] };
+
+            let allWords = [];
+            connectionsData.categories.forEach((cat, idx) => {
+                cat.words.forEach(word => {
+                    allWords.push({ word, categoryIndex: idx });
+                });
+            });
+
+            shuffleArray(allWords);
+            connectionsState.tiles = allWords;
+
+            renderConnections();
+            renderMistakes();
+            document.getElementById('solvedGroups').innerHTML = '';
+        }
+
+        function renderConnections() {
+            const grid = document.getElementById('connectionsGrid');
+            grid.innerHTML = '';
+
+            connectionsState.tiles.forEach((tile, idx) => {
+                if (!connectionsState.solved.includes(tile.categoryIndex)) {
+                    const el = document.createElement('div');
+                    el.className = 'connections-tile';
+                    el.textContent = tile.word;
+                    el.dataset.index = idx;
+
+                    if (connectionsState.selected.includes(idx)) {
+                        el.classList.add('selected');
+                    }
+
+                    el.onclick = () => toggleTile(idx);
+                    grid.appendChild(el);
+                }
+            });
+        }
+
+        function toggleTile(idx) {
+            const pos = connectionsState.selected.indexOf(idx);
+            if (pos > -1) {
+                connectionsState.selected.splice(pos, 1);
+            } else if (connectionsState.selected.length < 4) {
+                connectionsState.selected.push(idx);
+            }
+            renderConnections();
+        }
+
+        function deselectAll() {
+            connectionsState.selected = [];
+            renderConnections();
+        }
+
+        function shuffleConnections() {
+            const unsolved = connectionsState.tiles.filter(t => !connectionsState.solved.includes(t.categoryIndex));
+            shuffleArray(unsolved);
+
+            let unsolvedIdx = 0;
+            connectionsState.tiles = connectionsState.tiles.map(t => {
+                if (connectionsState.solved.includes(t.categoryIndex)) return t;
+                return unsolved[unsolvedIdx++];
+            });
+
+            connectionsState.selected = [];
+            renderConnections();
+        }
+
+        function submitConnections() {
+            if (connectionsState.selected.length !== 4) {
+                showToast('Select exactly 4 words');
+                return;
+            }
+
+            const selectedTiles = connectionsState.selected.map(i => connectionsState.tiles[i]);
+            const categories = selectedTiles.map(t => t.categoryIndex);
+
+            if (categories.every(c => c === categories[0])) {
+                const catIdx = categories[0];
+                connectionsState.solved.push(catIdx);
+
+                const cat = connectionsData.categories[catIdx];
+                const solvedDiv = document.getElementById('solvedGroups');
+                const groupEl = document.createElement('div');
+                groupEl.className = `solved-group ${cat.color}`;
+                groupEl.innerHTML = `<h4>${cat.name}</h4><p>${cat.words.join(', ')}</p>`;
+                solvedDiv.appendChild(groupEl);
+
+                connectionsState.selected = [];
+                renderConnections();
+
+                if (connectionsState.solved.length === 4) {
+                    showCompletion('connections', 4 - connectionsState.mistakes + 1, { 'Mistakes': 4 - connectionsState.mistakes });
+                }
+            } else {
+                connectionsState.mistakes--;
+                renderMistakes();
+
+                const countMap = {};
+                categories.forEach(c => countMap[c] = (countMap[c] || 0) + 1);
+                const maxCount = Math.max(...Object.values(countMap));
+
+                showToast(maxCount === 3 ? 'One away...' : 'Try again!');
+
+                if (connectionsState.mistakes === 0) {
+                    showToast('Game Over!');
+                    setTimeout(() => {
+                        connectionsData.categories.forEach((cat, idx) => {
+                            if (!connectionsState.solved.includes(idx)) {
+                                connectionsState.solved.push(idx);
+                                const solvedDiv = document.getElementById('solvedGroups');
+                                const groupEl = document.createElement('div');
+                                groupEl.className = `solved-group ${cat.color}`;
+                                groupEl.innerHTML = `<h4>${cat.name}</h4><p>${cat.words.join(', ')}</p>`;
+                                solvedDiv.appendChild(groupEl);
+                            }
+                        });
+                        renderConnections();
+                        setTimeout(() => showCompletion('connections', 0, { 'Mistakes': 4 }, false), 2000);
+                    }, 1000);
+                }
+            }
+        }
+
+        function renderMistakes() {
+            const display = document.getElementById('mistakesDisplay');
+            let html = 'Mistakes remaining: ';
+            for (let i = 0; i < 4; i++) {
+                html += `<span class="mistake-dot ${i >= connectionsState.mistakes ? 'used' : ''}"></span>`;
+            }
+            display.innerHTML = html;
+        }
+
+        // ============================================
+        // GAME 2: APPLIANCE WORDLE
+        // ============================================
+        let wordleState = {
+            currentRow: 0,
+            currentGuess: '',
+            gameOver: false
+        };
+
+        function initWordle() {
+            wordleState = { currentRow: 0, currentGuess: '', gameOver: false };
+            renderWordleGrid();
+            renderKeyboard();
+            document.addEventListener('keydown', handleWordleKey);
+        }
+
+        function renderWordleGrid() {
+            const grid = document.getElementById('wordleGrid');
+            grid.innerHTML = '';
+
+            for (let row = 0; row < 6; row++) {
+                const rowEl = document.createElement('div');
+                rowEl.className = 'wordle-row';
+
+                for (let col = 0; col < 5; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'wordle-cell';
+                    cell.id = `wordle-${row}-${col}`;
+                    rowEl.appendChild(cell);
+                }
+
+                grid.appendChild(rowEl);
+            }
+        }
+
+        function renderKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+            keyboard.innerHTML = '';
+
+            const rows = [
+                ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+                ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+                ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫']
+            ];
+
+            rows.forEach(row => {
+                const rowEl = document.createElement('div');
+                rowEl.className = 'keyboard-row';
+
+                row.forEach(key => {
+                    const keyEl = document.createElement('button');
+                    keyEl.className = 'key';
+                    keyEl.textContent = key;
+                    keyEl.id = `key-${key}`;
+                    if (key === 'ENTER' || key === '⌫') keyEl.classList.add('wide');
+                    keyEl.onclick = () => handleWordleInput(key);
+                    rowEl.appendChild(keyEl);
+                });
+
+                keyboard.appendChild(rowEl);
+            });
+        }
+
+        function handleWordleKey(e) {
+            if (currentGame !== 'wordle' || wordleState.gameOver) return;
+
+            if (e.key === 'Enter') handleWordleInput('ENTER');
+            else if (e.key === 'Backspace') handleWordleInput('⌫');
+            else if (/^[a-zA-Z]$/.test(e.key)) handleWordleInput(e.key.toUpperCase());
+        }
+
+        function handleWordleInput(key) {
+            if (wordleState.gameOver) return;
+
+            if (key === '⌫') {
+                if (wordleState.currentGuess.length > 0) {
+                    wordleState.currentGuess = wordleState.currentGuess.slice(0, -1);
+                    const col = wordleState.currentGuess.length;
+                    const cell = document.getElementById(`wordle-${wordleState.currentRow}-${col}`);
+                    cell.textContent = '';
+                    cell.classList.remove('filled');
+                }
+            } else if (key === 'ENTER') {
+                if (wordleState.currentGuess.length === 5) {
+                    submitWordleGuess();
+                } else {
+                    showToast('Not enough letters');
+                }
+            } else if (wordleState.currentGuess.length < 5) {
+                wordleState.currentGuess += key;
+                const col = wordleState.currentGuess.length - 1;
+                const cell = document.getElementById(`wordle-${wordleState.currentRow}-${col}`);
+                cell.textContent = key;
+                cell.classList.add('filled');
+            }
+        }
+
+        function submitWordleGuess() {
+            const guess = wordleState.currentGuess;
+            const answer = wordleAnswer;
+
+            const results = [];
+            const answerChars = answer.split('');
+            const guessChars = guess.split('');
+
+            guessChars.forEach((char, i) => {
+                if (char === answerChars[i]) {
+                    results[i] = 'correct';
+                    answerChars[i] = null;
+                }
+            });
+
+            guessChars.forEach((char, i) => {
+                if (results[i]) return;
+                const idx = answerChars.indexOf(char);
+                if (idx > -1) {
+                    results[i] = 'present';
+                    answerChars[idx] = null;
+                } else {
+                    results[i] = 'absent';
+                }
+            });
+
+            results.forEach((result, i) => {
+                setTimeout(() => {
+                    const cell = document.getElementById(`wordle-${wordleState.currentRow}-${i}`);
+                    cell.classList.add(result);
+
+                    const keyEl = document.getElementById(`key-${guessChars[i]}`);
+                    if (result === 'correct') {
+                        keyEl.classList.remove('present', 'absent');
+                        keyEl.classList.add('correct');
+                    } else if (result === 'present' && !keyEl.classList.contains('correct')) {
+                        keyEl.classList.remove('absent');
+                        keyEl.classList.add('present');
+                    } else if (!keyEl.classList.contains('correct') && !keyEl.classList.contains('present')) {
+                        keyEl.classList.add('absent');
+                    }
+                }, i * 150);
+            });
+
+            setTimeout(() => {
+                if (guess === answer) {
+                    wordleState.gameOver = true;
+                    document.removeEventListener('keydown', handleWordleKey);
+                    showCompletion('wordle', 7 - wordleState.currentRow, { 'Guesses': wordleState.currentRow + 1 });
+                } else if (wordleState.currentRow === 5) {
+                    wordleState.gameOver = true;
+                    document.removeEventListener('keydown', handleWordleKey);
+                    showToast(`The word was ${answer}`);
+                    setTimeout(() => showCompletion('wordle', 0, { 'Guesses': 6, 'Answer': answer }, false), 2000);
+                } else {
+                    wordleState.currentRow++;
+                    wordleState.currentGuess = '';
+                }
+            }, 750);
+        }
+
+        // ============================================
+        // GAME 3: AI FLASH CARDS
+        // ============================================
+        let flashCardState = {
+            current: 0,
+            correct: 0,
+            answers: []
+        };
+
+        function initFlashCards() {
+            flashCardState = { current: 0, correct: 0, answers: [] };
+            renderFlashCard();
+        }
+
+        function renderFlashCard() {
+            const container = document.getElementById('flashcardContainer');
+            const card = flashCardData[flashCardState.current];
+            const progress = flashCardState.current + 1;
+
+            let html = `
+                <div class="flashcard-progress">${progress} of ${flashCardData.length}</div>
+                <div class="flashcard-progress-bar">
+                    <div class="flashcard-progress-fill" style="width: ${(flashCardState.current / flashCardData.length) * 100}%"></div>
+                </div>
+                <div class="flashcard-term">
+                    <h3>${card.term}</h3>
+                </div>
+                <div class="flashcard-choices">
+                    <button class="flashcard-choice-btn" onclick="selectFlashCardAnswer('A')">
+                        <strong>A:</strong> ${card.choiceA}
+                    </button>
+                    <button class="flashcard-choice-btn" onclick="selectFlashCardAnswer('B')">
+                        <strong>B:</strong> ${card.choiceB}
+                    </button>
+                </div>
+                <div class="flashcard-score">Score: ${flashCardState.correct}/${flashCardState.current}</div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectFlashCardAnswer(choice) {
+            const card = flashCardData[flashCardState.current];
+            const isCorrect = choice === card.correct;
+
+            if (isCorrect) flashCardState.correct++;
+            flashCardState.answers.push({ term: card.term, choice, correct: isCorrect });
+
+            // Highlight buttons
+            const buttons = document.querySelectorAll('.flashcard-choice-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (card.correct === 'A') {
+                buttons[0].classList.add('correct');
+                if (choice === 'B') buttons[1].classList.add('wrong');
+            } else {
+                buttons[1].classList.add('correct');
+                if (choice === 'A') buttons[0].classList.add('wrong');
+            }
+
+            // Auto-advance after 1s
+            setTimeout(() => {
+                flashCardState.current++;
+                if (flashCardState.current >= flashCardData.length) {
+                    finishFlashCards();
+                } else {
+                    renderFlashCard();
+                }
+            }, 1000);
+        }
+
+        function finishFlashCards() {
+            const percentage = Math.round((flashCardState.correct / flashCardData.length) * 100);
+            const success = percentage >= 50;
+            showCompletion('crossword', percentage, {
+                'Correct': `${flashCardState.correct}/${flashCardData.length}`,
+                'Percentage': percentage
+            }, success);
+        }
+
+        // ============================================
+        // GAME 4: WORD JUMBLE
+        // ============================================
+        let jumbleState = {
+            words: [],
+            solvedWords: []
+        };
+
+        function initJumble() {
+            jumbleState = {
+                words: jumbleData.words.map(w => ({
+                    ...w,
+                    solved: false
+                })),
+                solvedWords: []
+            };
+
+            renderJumble();
+        }
+
+        function renderJumble() {
+            const container = document.getElementById('jumbleContainer');
+            let html = '';
+
+            jumbleState.words.forEach((word, wordIdx) => {
+                const isSolved = word.solved;
+                html += `<div class="jumble-word" id="jumble-word-${wordIdx}">
+                    <h4>Word ${wordIdx + 1}</h4>
+                    <div class="jumble-scrambled">${word.scrambled}</div>
+                    <div class="jumble-input-row">
+                        <input type="text" class="jumble-text-input ${isSolved ? 'correct' : ''}"
+                               id="jumble-input-${wordIdx}"
+                               maxlength="${word.answer.length}"
+                               placeholder="${word.answer.length} letters"
+                               ${isSolved ? `value="${word.answer}" disabled` : ''}
+                               onkeypress="if(event.key==='Enter') submitJumbleWord(${wordIdx})">
+                        ${!isSolved ? `<button class="btn btn-primary btn-small" onclick="submitJumbleWord(${wordIdx})">Go</button>` : '<span style="color: var(--success-green); font-size: 1.5rem;">✓</span>'}
+                    </div>
+                </div>`;
+            });
+
+            // Submit Score section (always visible)
+            const solvedCount = jumbleState.words.filter(w => w.solved).length;
+            html += `<div class="jumble-submit-section">
+                <p>Solved ${solvedCount} of ${jumbleState.words.length} words</p>
+                <button class="btn btn-primary" onclick="submitJumble()">Submit Score</button>
+            </div>`;
+
+            container.innerHTML = html;
+
+            // Focus first unsolved input
+            const firstUnsolved = jumbleState.words.findIndex(w => !w.solved);
+            if (firstUnsolved >= 0) {
+                const input = document.getElementById(`jumble-input-${firstUnsolved}`);
+                if (input) setTimeout(() => input.focus(), 100);
+            }
+        }
+
+        function submitJumbleWord(wordIdx) {
+            const word = jumbleState.words[wordIdx];
+            if (word.solved) return;
+
+            const input = document.getElementById(`jumble-input-${wordIdx}`);
+            const guess = input.value.toUpperCase().trim();
+
+            if (guess.length !== word.answer.length) {
+                showToast(`Enter ${word.answer.length} letters`);
+                return;
+            }
+
+            if (guess === word.answer) {
+                word.solved = true;
+                showToast('Correct!');
+                renderJumble();
+            } else {
+                showToast('Not quite, try again!');
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function submitJumble() {
+            const solvedCount = jumbleState.words.filter(w => w.solved).length;
+            const score = Math.round((solvedCount / jumbleState.words.length) * 100);
+            const success = solvedCount > 0;
+            showCompletion('jumble', score, {
+                'Words Solved': `${solvedCount}/${jumbleState.words.length}`
+            }, success);
+        }
+
+        // ============================================
+        // GAME 5: WHO WANTS TO BE A MILLIONAIRE
+        // ============================================
+        let millionaireState = {
+            currentQuestion: 0,
+            selectedAnswer: null,
+            fiftyFiftyUsed: false,
+            askAudienceUsed: false,
+            walkedAway: false,
+            gameOver: false
+        };
+
+        function initMillionaire() {
+            millionaireState = {
+                currentQuestion: 0,
+                selectedAnswer: null,
+                fiftyFiftyUsed: false,
+                askAudienceUsed: false,
+                walkedAway: false,
+                gameOver: false
+            };
+
+            renderMillionaire();
+        }
+
+        function renderMillionaire() {
+            const container = document.getElementById('millionaireContainer');
+            const q = millionaireQuestions[millionaireState.currentQuestion];
+
+            let html = `
+                <div class="millionaire-header">
+                    <h3>Question ${millionaireState.currentQuestion + 1} of 10</h3>
+                    <div class="prize-display">${q.value}</div>
+                </div>
+
+                <div class="lifelines">
+                    <button class="lifeline ${millionaireState.fiftyFiftyUsed ? 'used' : ''}"
+                            onclick="useFiftyFifty()" title="50:50">50:50</button>
+                    <button class="lifeline ${millionaireState.askAudienceUsed ? 'used' : ''}"
+                            onclick="useAskAudience()" title="Ask the Audience">👥</button>
+                </div>
+
+                <div class="prize-ladder">`;
+
+            // Show prize ladder (reverse order, current highlighted)
+            const prizes = millionaireQuestions.map(q => q.value).reverse();
+            prizes.forEach((prize, idx) => {
+                const actualIdx = 9 - idx;
+                const isCurrent = actualIdx === millionaireState.currentQuestion;
+                const isPassed = actualIdx < millionaireState.currentQuestion;
+                const isMilestone = actualIdx === 4 || actualIdx === 9;
+                html += `<div class="prize-rung ${isCurrent ? 'current' : ''} ${isPassed ? 'passed' : ''} ${isMilestone ? 'milestone' : ''}">
+                    <span>Q${actualIdx + 1}</span>
+                    <span>${prize}</span>
+                </div>`;
+            });
+
+            html += `</div>
+
+                <div class="question-container">
+                    <div class="question-text">${q.question}</div>
+                    <div class="answer-grid" id="answerGrid">`;
+
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const isHidden = q.hiddenOptions && q.hiddenOptions.includes(idx);
+                if (!isHidden) {
+                    html += `<button class="answer-option" onclick="selectMillionaireAnswer(${idx})" id="answer-${idx}">
+                        <span>${letters[idx]}:</span> ${opt}
+                    </button>`;
+                }
+            });
+
+            html += `</div>
+                </div>
+
+                <button class="btn btn-small walkaway-btn" onclick="walkAway()">Walk Away</button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectMillionaireAnswer(idx) {
+            if (millionaireState.gameOver) return;
+
+            const q = millionaireQuestions[millionaireState.currentQuestion];
+            const btn = document.getElementById(`answer-${idx}`);
+
+            // Show selection
+            document.querySelectorAll('.answer-option').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+
+            setTimeout(() => {
+                if (idx === q.correct) {
+                    btn.classList.add('correct');
+
+                    if (millionaireState.currentQuestion === 9) {
+                        // Won the game!
+                        millionaireState.gameOver = true;
+                        setTimeout(() => {
+                            showCompletion('millionaire', 10, { 'Prize': '$1 MILLION', 'Questions': 10 });
+                        }, 1500);
+                    } else {
+                        setTimeout(() => {
+                            millionaireState.currentQuestion++;
+                            renderMillionaire();
+                        }, 1500);
+                    }
+                } else {
+                    btn.classList.add('wrong');
+                    document.getElementById(`answer-${q.correct}`).classList.add('correct');
+                    millionaireState.gameOver = true;
+
+                    const safeHaven = millionaireState.currentQuestion >= 5 ? '$2,000' : '$0';
+                    const safeScore = millionaireState.currentQuestion >= 5 ? 5 : 0;
+                    showToast(`Game Over! You leave with ${safeHaven}`);
+                    setTimeout(() => showCompletion('millionaire', safeScore, {
+                        'Prize': safeHaven,
+                        'Questions': millionaireState.currentQuestion
+                    }, false), 3000);
+                }
+            }, 1000);
+        }
+
+        function useFiftyFifty() {
+            if (millionaireState.fiftyFiftyUsed || millionaireState.gameOver) return;
+            millionaireState.fiftyFiftyUsed = true;
+
+            const q = millionaireQuestions[millionaireState.currentQuestion];
+            const wrongAnswers = [0, 1, 2, 3].filter(i => i !== q.correct);
+            shuffleArray(wrongAnswers);
+            q.hiddenOptions = wrongAnswers.slice(0, 2);
+
+            renderMillionaire();
+        }
+
+        function useAskAudience() {
+            if (millionaireState.askAudienceUsed || millionaireState.gameOver) return;
+            millionaireState.askAudienceUsed = true;
+
+            const q = millionaireQuestions[millionaireState.currentQuestion];
+            const letters = ['A', 'B', 'C', 'D'];
+
+            // Generate fake audience results favoring correct answer
+            let percentages = [0, 0, 0, 0];
+            percentages[q.correct] = 45 + Math.floor(Math.random() * 30);
+            let remaining = 100 - percentages[q.correct];
+
+            [0, 1, 2, 3].filter(i => i !== q.correct).forEach((i, idx, arr) => {
+                if (idx === arr.length - 1) {
+                    percentages[i] = remaining;
+                } else {
+                    const portion = Math.floor(Math.random() * (remaining / 2));
+                    percentages[i] = portion;
+                    remaining -= portion;
+                }
+            });
+
+            showToast(`Audience: A:${percentages[0]}% B:${percentages[1]}% C:${percentages[2]}% D:${percentages[3]}%`);
+        }
+
+        function walkAway() {
+            if (millionaireState.gameOver) return;
+            millionaireState.gameOver = true;
+
+            const prize = millionaireState.currentQuestion > 0
+                ? millionaireQuestions[millionaireState.currentQuestion - 1].value
+                : '$0';
+
+            showCompletion('millionaire', millionaireState.currentQuestion, {
+                'Prize': prize,
+                'Questions': millionaireState.currentQuestion
+            });
+        }
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        document.getElementById('playerNameInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') startGame();
+        });
+
+        // Start listening to Firebase leaderboard on page load
+        initLeaderboardListener();
+    </script>
+</body>
+</html>
