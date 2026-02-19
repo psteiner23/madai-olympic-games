@@ -1535,16 +1535,16 @@
 
         // Flash Card data - 10 AI/tech terms with three plausible definitions
         const flashCardData = [
-            { term: "LLM", choiceA: "Large Language Model", choiceB: "Low Latency Memory", choiceC: "Linked Logic Machine", correct: "A" },
-            { term: "GPU", choiceA: "General Purpose Utility", choiceB: "Graphics Processing Unit", choiceC: "Global Parameter Update", correct: "B" },
-            { term: "NLP", choiceA: "Natural Language Processing", choiceB: "Network Layer Protocol", choiceC: "Neural Link Platform", correct: "A" },
-            { term: "API", choiceA: "Automated Program Installation", choiceB: "Application Programming Interface", choiceC: "Adaptive Processing Index", correct: "B" },
-            { term: "RAG", choiceA: "Retrieval Augmented Generation", choiceB: "Rapid Algorithm Growth", choiceC: "Recursive Analysis Gateway", correct: "A" },
-            { term: "RLHF", choiceA: "Recursive Logic Hash Function", choiceB: "Reinforcement Learning from Human Feedback", choiceC: "Real-time Low Frequency Handler", correct: "B" },
-            { term: "CNN", choiceA: "Convolutional Neural Network", choiceB: "Central Node Nexus", choiceC: "Cascading Neuron Notation", correct: "A" },
-            { term: "GAN", choiceA: "Global Access Network", choiceB: "Generative Adversarial Network", choiceC: "Grouped Attention Node", correct: "B" },
-            { term: "IoT", choiceA: "Internet of Things", choiceB: "Integration of Technologies", choiceC: "Intelligent Output Terminal", correct: "A" },
-            { term: "BERT", choiceA: "Binary Encoding for Real-Time", choiceB: "Bidirectional Encoder Representations from Transformers", choiceC: "Baseline Entity Recognition Tool", correct: "B" }
+            { term: "ANI", choiceA: "Artificial Neural Intelligence", choiceB: "Artificial Narrow Intelligence", choiceC: "Artificial Native Intelligence", correct: "B" },
+            { term: "AGI", choiceA: "Artificial Grounded Intelligence", choiceB: "Artificial Governed Intelligence", choiceC: "Artificial General Intelligence", correct: "C" },
+            { term: "ASI", choiceA: "Artificial Scaled Intelligence", choiceB: "Artificial Super Intelligence", choiceC: "Artificial Synthetic Intelligence", correct: "B" },
+            { term: "ML", choiceA: "Multi-Layer Processing", choiceB: "Machine Learning", choiceC: "Model Logic Framework", correct: "B" },
+            { term: "LLM", choiceA: "Large Language Model", choiceB: "Low Latency Memory", choiceC: "Layered Logic Matrix", correct: "A" },
+            { term: "Temperature", choiceA: "Computational heat generated during model training", choiceB: "A setting that scales the model's processing speed", choiceC: "A parameter that controls randomness in AI-generated outputs", correct: "C" },
+            { term: "Stochastic", choiceA: "A fixed, repeatable process that always produces the same result", choiceB: "The ability of an AI to learn from mistakes over time", choiceC: "Randomness built into AI so the same question can get different answers each time", correct: "C" },
+            { term: "Agentic AI", choiceA: "AI trained exclusively on real-world human agent behavior logs", choiceB: "AI that autonomously plans and executes multi-step tasks using tools", choiceC: "AI that mimics individual decisions through reinforcement cloning", correct: "B" },
+            { term: "Predictive AI", choiceA: "AI that generates synthetic training data to improve future models", choiceB: "AI that detects anomalies in real-time data streams", choiceC: "AI that forecasts future outcomes based on patterns in historical data", correct: "C" },
+            { term: "Generative AI", choiceA: "AI that creates new content such as text, images, or audio", choiceB: "AI that improves its accuracy through iterative self-evaluation", choiceC: "AI that retrieves and ranks relevant documents from a knowledge base", correct: "A" }
         ];
 
         // Jumble data
@@ -1567,9 +1567,9 @@
                 value: "$100"
             },
             {
-                question: "Which company created ChatGPT?",
-                options: ["Google", "Microsoft", "OpenAI", "Meta"],
-                correct: 2,
+                question: "Which of these is NOT an AI chatbot?",
+                options: ["Gemini", "ChatGPT", "Claude", "AlphaGo"],
+                correct: 3,
                 value: "$200"
             },
             {
@@ -1579,44 +1579,44 @@
                 value: "$500"
             },
             {
-                question: "What type of AI model is GPT?",
-                options: ["Image classifier", "Large Language Model", "Search engine", "Database"],
-                correct: 1,
+                question: "What type of AI is an LLM?",
+                options: ["Generative AI", "Predictive AI", "Image Generator", "Agentic AI"],
+                correct: 0,
                 value: "$1,000"
             },
             {
-                question: "What does 'LLM' stand for?",
-                options: ["Large Learning Machine", "Linear Logic Model", "Large Language Model", "Low Latency Module"],
-                correct: 2,
+                question: "LLMs generate text by predicting…",
+                options: ["Best next word", "Next token probabilities", "Recurring patterns", "User's preferred answer"],
+                correct: 1,
                 value: "$2,000"
             },
             {
-                question: "Which technique trains AI using human feedback?",
-                options: ["RLHF", "CNN", "RNN", "SQL"],
-                correct: 0,
+                question: "A context window refers to…",
+                options: ["The size of the model's training dataset", "How much a model can consider at once", "The speed at which a model processes text", "The maximum number of users a model can serve"],
+                correct: 1,
                 value: "$4,000"
             },
             {
-                question: "What is the 'temperature' parameter in AI?",
-                options: ["Hardware heat level", "Response randomness control", "Processing speed", "Memory usage"],
+                question: "What is a 'token' in the context of an LLM?",
+                options: ["A login credential used to access the AI", "A chunk of text roughly equal to a word or part of a word", "A unit of compute time used during inference", "A single training example from the dataset"],
                 correct: 1,
                 value: "$8,000"
             },
             {
-                question: "What is a 'token' in language models?",
-                options: ["A security key", "A piece of text (word/subword)", "A hardware chip", "A training example"],
-                correct: 1,
+                question: "Flattening in LLMs refers to…",
+                options: ["Compressing model size to improve speed", "Removing duplicate responses from training data", "Converting multi-dimensional data into a single layer", "Regressing to middle ground"],
+                correct: 3,
                 value: "$16,000"
             },
             {
-                question: "What does 'fine-tuning' mean in AI?",
-                options: ["Adjusting volume", "Training on specific data after pre-training", "Reducing model size", "Fixing bugs"],
-                correct: 1,
+                question: "\"Bezos mode\" refers to",
+                options: ["Automating repetitive tasks with AI", "Delegating decisions to data analytics", "Constantly tackling hard problems", "Prioritizing customer feedback above all else"],
+                correct: 2,
                 value: "$32,000"
             },
             {
-                question: "What is the 'Turing Test' designed to evaluate?",
-                options: ["Processing speed", "Machine's ability to exhibit human-like intelligence", "Memory capacity", "Energy efficiency"],
+                question: "The highest level of Bloom's cognitive taxonomy is",
+                options: ["Imagine", "Create", "Evaluate", "Apply"],
                 correct: 1,
                 value: "$1 MILLION"
             }
